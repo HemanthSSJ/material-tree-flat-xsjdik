@@ -1,0 +1,23 @@
+<h1>https://material-tree-flat.stackblitz.io</h1>
+
+<mat-checkbox [(ngModel)]="recursive">Recursive</mat-checkbox>
+
+<mat-card>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding 
+                  [class.example-tree-node-odd]="isOdd(node)">
+      <button mat-icon-button disabled></button>
+      {{node.item}}
+    </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChildren" matTreeNodePadding
+                  [class.example-tree-node-odd]="isOdd(node)">
+      <button mat-icon-button matTreeNodeToggle
+              [matTreeNodeToggleRecursive]="recursive" 
+              [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon>
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button> {{node.item}}
+    </mat-tree-node>
+  </mat-tree>
+</mat-card>
